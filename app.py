@@ -20,7 +20,6 @@ def connect_terminal():
     if pid == 0:
         os.execvp("bash", ["bash"])
     else:
-        app.logger.info("Spawned bash with pid %s", pid)
         socketio.start_background_task(target=read_output, fd=fd)
 
         @socketio.on("input", namespace="/terminal")
