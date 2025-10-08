@@ -49,7 +49,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const socket = io('/terminal');
 
-  socket.on('connect', () => term.writeln('Connected to Flask terminal\r\n'));
+  socket.on('connect', () => term.writeln('[Connected]\r\n'));
   socket.on('disconnect', () => term.writeln('\r\n[disconnected]'));
   socket.on('output', data => term.write(data));
 
