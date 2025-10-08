@@ -40,6 +40,7 @@ body {
 
 #history {
   flex: 3;
+  max-height: 30vh;
   overflow-y: auto;
   border-top: 1px solid #444;
   padding: 8px;
