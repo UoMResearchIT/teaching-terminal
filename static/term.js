@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const term = new Terminal({ theme: { background: '#1e1e1e' },
                               cursorBlink: true,
-                              fontSize: 18
+                              fontSize: 16
                             });
   term.open(terminalContainer);
 
