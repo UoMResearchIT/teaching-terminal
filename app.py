@@ -26,11 +26,6 @@ def connect_terminal():
         @socketio.on("input", namespace="/terminal")
         def _receive(data):
             os.write(fd, data.encode())
-            if data.endswith("\r"):  # Enter pressed
-                # Roughly extract last command from buffer
-                line = data.strip()
-                if line:
-                    log_command(line)
 
         @socketio.on("disconnect", namespace="/terminal")
         def _disconnect():
