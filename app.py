@@ -59,15 +59,18 @@ def connect_terminal():
                 pass
 
 def read_output(fd):
-    """Continuously read pty and emit to client"""
     while True:
         socketio.sleep(0.01)
-        if select.select([fd], [], [], 0)[0]:
-            try:
+        try:
+            # Check file descriptor
+            if select.select([fd], [], [], 0)[0]:
+                # Get data
                 data = os.read(fd, 1024).decode(errors="ignore")
+
+                # Emit
                 socketio.emit("output", data, namespace="/terminal")
-            except OSError:
-                break
+        except (OSError, ValueError):
+            break
 
 @app.route("/save", methods=["POST"])
 def save_file():
