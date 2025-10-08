@@ -1,0 +1,36 @@
+body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+    margin: 0;
+    background: #1e1e1e;
+    color: #ccc;
+    font-family: monospace;
+}
+#editor {
+    border-right: 1px solid #444;
+    display: flex;
+    flex-direction: column;
+}
+#monaco-editor {
+    flex: 1;
+}
+#saveBtn {
+    padding: 4px 8px;
+    background: #007acc;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+#terminal {
+    height: 70%;
+    padding: 8px;
+}
+#history {
+    height: 30%;
+    overflow-y: auto;
+    border-top: 1px solid #444;
+    padding: 8px;
+    background: #111;
+}
+.cmd { margin: 2px 0; }
