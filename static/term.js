@@ -15,13 +15,16 @@ window.addEventListener('DOMContentLoaded', () => {
       fontSize: 18      
     });
 
-    // Ctrl+S shortcut
-    window.editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, () => {
-      fetch('/save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content: window.editor.getValue() })
-      }).then(() => alert('Saved!'));
+    let saveTimer = null;
+    window.editor.onDidChangeModelContent(() => {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => {
+        fetch('/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content: window.editor.getValue() })
+        });
+      }, 500); // save 0.5s after typing stops
     });
   });
 
@@ -36,7 +39,6 @@ window.addEventListener('DOMContentLoaded', () => {
                             });
   term.open(terminalContainer);
 
-  // load FitAddon (CDN global)
   const fitAddon = new FitAddon.FitAddon();
   term.loadAddon(fitAddon);
   fitAddon.fit();
