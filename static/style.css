@@ -1,36 +1,47 @@
 body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 100vh;
-    margin: 0;
-    background: #1e1e1e;
-    color: #ccc;
-    font-family: monospace;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: 1fr;
+  height: 100vh;
+  margin: 0;
+  background: #1e1e1e;
+  color: #ccc;
+  font-family: monospace;
 }
+
 #editor {
-    border-right: 1px solid #444;
-    display: flex;
-    flex-direction: column;
+  border-right: 1px solid #444;
+  display: flex;
+  flex-direction: column;
 }
+
 #monaco-editor {
-    flex: 1;
+  flex: 7;
 }
+
 #saveBtn {
-    padding: 4px 8px;
-    background: #007acc;
-    border: none;
-    color: #fff;
-    cursor: pointer;
+  flex: 1;
+  padding: 4px 8px;
+  background: #007acc;
+  border: none;
+  color: #fff;
+  cursor: pointer;
 }
+
+#terminal-container {
+  display: flex;
+  flex-direction: column;
+}
+
 #terminal {
-    height: 70%;
-    padding: 8px;
+  flex: 7;
+  padding: 8px;
 }
+
 #history {
-    height: 30%;
-    overflow-y: auto;
-    border-top: 1px solid #444;
-    padding: 8px;
-    background: #111;
+  flex: 3;
+  overflow-y: auto;
+  border-top: 1px solid #444;
+  padding: 8px;
+  background: #111;
 }
-.cmd { margin: 2px 0; }
