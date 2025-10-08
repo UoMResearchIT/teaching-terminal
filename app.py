@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, emit
 import subprocess, os, pty, select, json
 
 app = Flask(__name__, static_folder="static")
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
 
 HISTORY_FILE = "bash_history.json"
 
