@@ -5,31 +5,12 @@ import subprocess, os, pty, select, json
 app = Flask(__name__, static_folder="static")
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
 
-HISTORY_FILE = "bash_history.json"
 SAVE_FILE = "Dockerfile"
-
-# --- util: append command to history as soon as entered ---
-def log_command(cmd):
-    history = []
-    if os.path.exists(HISTORY_FILE):
-        with open(HISTORY_FILE) as f:
-            history = json.load(f)
-    history.append(cmd)
-    with open(HISTORY_FILE, "w") as f:
-        json.dump(history[-200:], f, indent=2)  # keep last 200 cmds
 
 # --- serve frontend ---
 @app.route("/")
 def index():
     return send_from_directory(app.static_folder, "index.html")
-
-# --- endpoint to read saved history (for the log panel) ---
-@app.route("/history")
-def history():
-    if not os.path.exists(HISTORY_FILE):
-        return jsonify([])
-    with open(HISTORY_FILE) as f:
-        return jsonify(json.load(f))
 
 # --- WebSocket terminal handler ---
 @socketio.on("connect", namespace="/terminal")
