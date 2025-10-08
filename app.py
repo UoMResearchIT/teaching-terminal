@@ -6,6 +6,7 @@ app = Flask(__name__, static_folder="static")
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
 
 HISTORY_FILE = "bash_history.json"
+SAVE_FILE = "Dockerfile"
 
 # --- util: append command to history as soon as entered ---
 def log_command(cmd):
@@ -68,7 +69,6 @@ def read_output(fd):
             except OSError:
                 break
 
-SAVE_FILE = "Dockerfile"
 @app.route("/save", methods=["POST"])
 def save_file():
     content = request.json.get("content", "")
