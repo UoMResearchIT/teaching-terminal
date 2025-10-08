@@ -8,7 +8,6 @@ window.addEventListener('DOMContentLoaded', () => {
   require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.43.0/min/vs' }});
   require(['vs/editor/editor.main'], function () {
     window.editor = monaco.editor.create(editorContainer, {
-      value: '# Start editing your Dockerfile or YAML\n',
       language: 'dockerfile',
       theme: 'vs-dark',
       automaticLayout: false, // we'll handle resizing ourselves
@@ -19,10 +18,13 @@ window.addEventListener('DOMContentLoaded', () => {
     window.editor.onDidChangeModelContent(() => {
       clearTimeout(saveTimer);
       saveTimer = setTimeout(() => {
+        const path = document.getElementById('filename').value.trim() || 'untitled';
+        const content = window.editor.getValue();
+        
         fetch('/save', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content: window.editor.getValue() })
+          body: JSON.stringify({ path, content })
         });
       }, 500); // save 0.5s after typing stops
     });

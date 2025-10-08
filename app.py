@@ -5,8 +5,6 @@ import subprocess, os, pty, select, json
 app = Flask(__name__, static_folder="static")
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
 
-SAVE_FILE = "Dockerfile"
-
 # --- serve frontend ---
 @app.route("/")
 def index():
@@ -49,8 +47,10 @@ def read_output(fd):
 
 @app.route("/save", methods=["POST"])
 def save_file():
-    content = request.json.get("content", "")
-    with open(SAVE_FILE, "w") as f:
+    data = request.get_json()
+    path = data["path"]
+    content = data["content"]
+    with open(path, "w") as f:
         f.write(content)
     return jsonify({"status":"ok"})
 
