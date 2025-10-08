@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
       language: 'dockerfile',
       theme: 'vs-dark',
       automaticLayout: false, // we'll handle resizing ourselves
+      fontSize: 18      
     });
 
     // Ctrl+S shortcut
@@ -29,7 +30,10 @@ window.addEventListener('DOMContentLoaded', () => {
   
   const terminalContainer = document.getElementById('terminal');
 
-  const term = new Terminal({ theme: { background: '#1e1e1e' }, cursorBlink: true });
+  const term = new Terminal({ theme: { background: '#1e1e1e' },
+                              cursorBlink: true,
+                              fontSize: 18
+                            });
   term.open(terminalContainer);
 
   // load FitAddon (CDN global)
